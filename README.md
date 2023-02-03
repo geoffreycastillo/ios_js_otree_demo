@@ -1,14 +1,14 @@
 # ios.js oTree demo app
 
-Here we give an example on how to use [`ios.js`](https://github.com/geoffreycastillo/ios-js) in the context of an oTree experiment.
+Here we give an example on how to use [`ios.js`](https://github.com/geoffreycastillo/ios-js) in an oTree experiment.
 
 ## Installation
 
-Simply clone this repository or [download the latest release](/releases).
+Simply clone this repository or [download the latest release](https://github.com/geoffreycastillo/ios_js_otree_demo/releases).
 
 ## Bugs? Suggestions?
 
-[Open an issue](/issues) or a [pull request](/pulls), or email me at [`geoffrey.castillo@univie.ac.at`](mailto:geoffrey.castillo@univie.ac.at).
+[Open an issue](https://github.com/geoffreycastillo/ios_js_otree_demo/issues) or a [pull request](https://github.com/geoffreycastillo/ios_js_otree_demo/pulls), or email me at [`geoffrey.castillo@univie.ac.at`](mailto:geoffrey.castillo@univie.ac.at).
 
 ## Licence
 
