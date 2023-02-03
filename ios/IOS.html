@@ -1,0 +1,77 @@
+{{ block title }}
+    Task
+{{ endblock }}
+
+{{ block content }}
+<p>
+    In this task we ask you to
+    {% if is_ios_continuous %}
+        shift the circles to
+    {% elif is_ios_discrete %}
+        choose a pair of circles that
+    {% endif %}
+    best represents your connection with the participant.
+</p>
+
+<p>
+    {% if is_ios_continuous %}
+        Click on the left circle, drag it to the right and drop it when the circles
+    {% elif is_ios_discrete %}
+        Select the pair of circles which
+    {% endif %}
+    indicate to what extent you and the participant are connected.
+</p>
+
+<div class="d-flex justify-content-center m-2">
+    <div id="ios"></div>
+</div>
+
+
+<p>
+    Then, click on the 'Next' button.
+</p>
+
+{{ next_button }}
+{# the {{ if not is_ios_original }}value="0"{{ endif }} are here to set initial values #}
+{# when not in the original IOS #}
+{# in these cases the subject could click next without touching the IOS #}
+{# which would be valid if the subject doesn't feel connected at all #}
+<input type="hidden" id="ios_distance" name="ios_distance" {{ if not is_ios_original }}value="0"{{ endif }}/>
+<input type="hidden" id="ios_overlap" name="ios_overlap" {{ if not is_ios_original }}value="0"{{ endif }}/>
+{% if is_ios_discrete %}
+    <input type="hidden" id="ios_number" name="ios_number"/>
+{% endif %}
+
+{{ endblock }}
+
+{{ block scripts }}
+<script src="https://cdn.jsdelivr.net/npm/interactjs@1.10.17/dist/interact.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/geoffreycastillo/ios-js@0.1.1/ios.min.js"></script>
+<script>
+    const ios = new Ios({
+        el: 'ios',
+        type: '{{ subsession.ios_type }}',
+        {# you can insert here more options for ios.js #}
+    });
+
+    const ios_distance_input = document.getElementById('ios_distance');
+    const ios_overlap_input = document.getElementById('ios_overlap');
+    const ios_number_input = document.getElementById('ios_number');
+
+    document.getElementById('ios').addEventListener(
+        'mousedown',
+        () => {
+            window.addEventListener(
+                'mouseup',
+                () => {
+                    ios_distance_input.value = ios.proportionDistance;
+                    ios_overlap_input.value = ios.proportionOverlap;
+                    {{ if not is_ios_continuous }}
+                        ios_number_input.value = ios.currentCircle;
+                    {{ endif }}
+                },
+                false)
+        }, false
+    );
+</script>
+{{ endblock }}

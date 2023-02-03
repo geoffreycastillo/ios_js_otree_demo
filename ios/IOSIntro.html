@@ -1,0 +1,67 @@
+{{ block title }}
+    Instructions
+{{ endblock }}
+
+{{ block content }}
+<p>
+    We will now ask you to consider how connected you feel towards the participant.
+</p>
+
+<p>
+    More specifically, we will show you the following circles:
+</p>
+
+<div class="d-flex justify-content-center m-2">
+    <div id="ios"></div>
+</div>
+
+{{ if not is_ios_original }}
+<p>
+    You can manipulate the circles by
+    {{ if is_ios_continuous }}
+    clicking on the left circle, then drag-and-dropping it.
+    {{ elif is_ios_discrete }}
+    clicking on the left and right buttons on each side of the circles.
+    {{ endif }}
+</p>
+{{ endif }}
+
+
+<p>
+    The overlap of the circles represents the connection you feel towards the other participant.
+    For example, a stronger connection between you and the other participant would be represented by a greater overlap of the circles.
+</p>
+
+<p>
+    We will ask you to
+    {{ if not is_ios_original }}
+        {{ if is_ios_continuous }}
+            shift the circles
+        {{ elif is_ios_discrete }}
+            click the buttons
+        {{ endif }}
+        until you find a configuration
+    {{ else }}
+        select a pair of circles
+    {{ endif }}
+    that best represents the connection you feel toward the participant.
+</p>
+
+<p>
+    You can practice on this page as much as you want.
+</p>
+
+{{ next_button }}
+{{ endblock }}
+
+{{ block scripts }}
+<script src="https://cdn.jsdelivr.net/npm/interactjs@1.10.17/dist/interact.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/geoffreycastillo/ios-js@0.1.1/ios.min.js"></script>
+<script>
+    const ios = new Ios({
+        el: 'ios',
+        type: '{{ subsession.ios_type }}',
+        {# you can insert here more options for ios.js #}
+    });
+</script>
+{{ endblock }}
